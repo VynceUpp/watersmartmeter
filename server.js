@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const houseRoutes = require('./routes/houses');
+const fetchSensorData = require('./fetchwaziupData');
 
 const app = express();
 
@@ -14,6 +15,10 @@ app.use('/api/houses', houseRoutes);
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://smartwater:smartwaterpassword@cluster1.xhnszwz.mongodb.net/');
+
+// Start fetching Waziup data
+fetchSensorData();
+
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
